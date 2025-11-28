@@ -2,18 +2,18 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "953f4a6481a0c5bd6097",
   "position": {
-    "x": 675.710055758508,
-    "y": 36.226879446260334,
+    "x": 351.24322245721976,
+    "y": 137.03210920976736,
     "z": 0,
-    "height": 281.93962699480869,
-    "width": 576.47990771005573,
+    "height": 530.80253797346666,
+    "width": 852.1192078446453,
     "tabOrder": 0
   },
   "visual": {
-    "visualType": "areaChart",
+    "visualType": "tableEx",
     "query": {
       "queryState": {
-        "Category": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -27,31 +27,63 @@
                 }
               },
               "queryRef": "calendario.Data",
-              "nativeQueryRef": "Data",
-              "active": true
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
+              "nativeQueryRef": "Data"
+            },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "cotacoes"
-                        }
-                      },
-                      "Property": "Cotacao"
+                    "SourceRef": {
+                      "Entity": "transacoes"
                     }
                   },
-                  "Function": 1
+                  "Property": "Valor Total"
                 }
               },
-              "queryRef": "Avg(cotacoes.Cotacao)",
-              "nativeQueryRef": "Média de Cotacao"
+              "queryRef": "transacoes.Valor Total",
+              "nativeQueryRef": "Valor Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cotacoes"
+                    }
+                  },
+                  "Property": "Cotação do dia"
+                }
+              },
+              "queryRef": "cotacoes.Cotação do dia",
+              "nativeQueryRef": "Cotação do dia"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "transacoes"
+                    }
+                  },
+                  "Property": "Cotação corrigida"
+                }
+              },
+              "queryRef": "transacoes.Cotação corrigida",
+              "nativeQueryRef": "Cotação corrigida"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "transacoes"
+                    }
+                  },
+                  "Property": "Total R$"
+                }
+              },
+              "queryRef": "transacoes.Total R$",
+              "nativeQueryRef": "Total R$"
             }
           ]
         }
@@ -74,6 +106,80 @@
         ],
         "isDefaultSort": true
       }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "107.22957123630073D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "calendario.Data"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "121.96459232705374D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "transacoes.Valor Total"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "138.92597577388966D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "cotacoes.Cotação do dia"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "154.2840479497322D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "transacoes.Cotação corrigida"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "132.59088907685577D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "transacoes.Total R$"
+          }
+        }
+      ]
     },
     "drillFilterOtherVisuals": true
   }
