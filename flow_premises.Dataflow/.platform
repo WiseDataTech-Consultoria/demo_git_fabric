@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "flow_premises",
+    "description": "Coleta os dados da planilha Excel na máquina local"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c39e4b50-447b-a870-473a-e88bd8332fc3"
+  }
+}
