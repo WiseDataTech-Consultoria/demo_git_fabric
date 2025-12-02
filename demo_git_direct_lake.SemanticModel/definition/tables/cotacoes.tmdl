@@ -1,0 +1,124 @@
+table cotacoes
+	lineageTag: 41e2673b-c827-4877-bbbb-b0c7a2338771
+	sourceLineageTag: [dbo].[cotacoes]
+
+	measure 'Cotação do dia' = ```
+			AVERAGE(cotacoes[Cotacao]) 
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Medidas
+		lineageTag: 046578d5-c6a7-45da-a07d-c2e0a0bfc1ca
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Cotação corrigida' = ```
+			
+			
+			VAR __DataCtx = MAX(calendario[Data]) 
+			
+			VAR __UltimaDataComCotacao = 
+			    CALCULATE(
+			        LASTNONBLANK(calendario[Data], [Cotação do dia]),
+			        calendario[Data] <= __DataCtx
+			    )
+			
+			RETURN
+			    CALCULATE(
+			        [Cotação do dia],
+			        calendario[Data] = __UltimaDataComCotacao
+			    )
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Medidas
+		lineageTag: 89940d42-98a8-4b8a-bfec-3f7bc53724bf
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Moeda
+		dataType: string
+		displayFolder: Colunas
+		lineageTag: d36213bc-ce12-4e2f-93e0-135e8191ff10
+		sourceLineageTag: Moeda
+		summarizeBy: none
+		sourceColumn: Moeda
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataHoraCotacao
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: Colunas
+		lineageTag: 09898f12-9c54-4e07-bfc7-4a5c45dde324
+		sourceLineageTag: DataHoraCotacao
+		summarizeBy: none
+		sourceColumn: DataHoraCotacao
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataCotacao
+		dataType: dateTime
+		formatString: Short Date
+		displayFolder: Colunas
+		lineageTag: 6889bbd8-7b90-43fc-86ef-6a35293373d2
+		sourceLineageTag: DataCotacao
+		summarizeBy: none
+		sourceColumn: DataCotacao
+
+		changedProperty = FormatString
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cotacao
+		dataType: double
+		displayFolder: Colunas
+		lineageTag: b9080b36-c1ea-4b8b-a17f-2b17e2a1e736
+		sourceLineageTag: Cotacao
+		summarizeBy: average
+		sourceColumn: Cotacao
+
+		changedProperty = SummarizeBy
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TipoBoletim
+		dataType: string
+		displayFolder: Colunas
+		lineageTag: 9ad912d2-d763-4e8e-9b0d-e8958613c3f3
+		sourceLineageTag: TipoBoletim
+		summarizeBy: none
+		sourceColumn: TipoBoletim
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cotacoes = entity
+		mode: directLake
+		source
+			entityName: cotacoes
+			schemaName: dbo
+			expressionSource: 'DirectLake - lake'
+

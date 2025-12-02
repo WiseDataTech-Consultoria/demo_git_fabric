@@ -1,0 +1,99 @@
+table transacoes
+	lineageTag: 4d5cfc15-22f1-4ad5-84fd-3ccd98c3f601
+	sourceLineageTag: [dbo].[transacoes]
+
+	measure 'Valor Total' = SUM(transacoes[Total])
+		formatString: #,0.00
+		displayFolder: Medidas
+		lineageTag: 834b0ef4-8f79-4b92-bd6d-51b31f2cc6db
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		changedProperty = DisplayFolder
+
+	measure 'Total R$' = ```
+			
+			SUMX(
+			    moedas,
+			    SUMX(
+			        calendario,
+			        COALESCE([Cotação corrigida], 1) * [Valor Total] 
+			    )
+			) 
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Medidas
+		lineageTag: 51f11205-920f-4979-bc93-f62171d42867
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		changedProperty = DisplayFolder
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column ID
+		dataType: double
+		displayFolder: Colunas
+		lineageTag: bd9bd444-1731-4c7e-aa62-bd1657821886
+		sourceLineageTag: ID
+		summarizeBy: count
+		sourceColumn: ID
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Data
+		dataType: dateTime
+		formatString: Short Date
+		displayFolder: Colunas
+		lineageTag: 38e47a6f-4129-4410-8f93-2198b1460275
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		changedProperty = FormatString
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: double
+		displayFolder: Colunas
+		lineageTag: 8323ab09-86d5-448f-92a1-2eec6983bba1
+		sourceLineageTag: Total
+		summarizeBy: sum
+		sourceColumn: Total
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Moeda
+		dataType: string
+		displayFolder: Colunas
+		lineageTag: d0032115-370a-4f48-a12e-8153b8ef5f68
+		sourceLineageTag: Moeda
+		summarizeBy: none
+		sourceColumn: Moeda
+
+		changedProperty = DisplayFolder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition transacoes = entity
+		mode: directLake
+		source
+			entityName: transacoes
+			schemaName: dbo
+			expressionSource: 'DirectLake - lake'
+

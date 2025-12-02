@@ -1,0 +1,38 @@
+table moedas
+	lineageTag: 17134f52-90fd-4bd2-bffa-d17a033cd110
+	sourceLineageTag: [dbo].[moedas]
+
+	column Moeda
+		dataType: string
+		lineageTag: 09e2857c-21c2-492b-b539-4083c54a9227
+		sourceLineageTag: Moeda
+		summarizeBy: none
+		sourceColumn: Moeda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome
+		dataType: string
+		lineageTag: 2b53e87a-35b9-4e15-9bea-95a6fee7e74f
+		sourceLineageTag: Nome
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Formato
+		dataType: string
+		lineageTag: ac7fc383-6971-4a89-8977-df040528485e
+		sourceLineageTag: Formato
+		summarizeBy: none
+		sourceColumn: Formato
+
+		annotation SummarizationSetBy = Automatic
+
+	partition moedas = entity
+		mode: directLake
+		source
+			entityName: moedas
+			schemaName: dbo
+			expressionSource: 'DirectLake - lake'
+
