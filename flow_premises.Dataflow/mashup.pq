@@ -50,17 +50,17 @@ shared transacoes = let
     )
 in
     datesRestricted;
-shared calendario_DataDestination = let
-  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "2c0d3e32-e676-4630-9b09-65abc777de0c"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "6450f0af-ea66-4e55-a73b-2b4b1311b19d"]}[Data],
-  TableNavigation = Navigation_2{[Id = "calendario", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
 shared transacoes_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "2c0d3e32-e676-4630-9b09-65abc777de0c"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "6450f0af-ea66-4e55-a73b-2b4b1311b19d"]}[Data],
   TableNavigation = Navigation_2{[Id = "transacoes", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared calendario_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "2c0d3e32-e676-4630-9b09-65abc777de0c"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "6450f0af-ea66-4e55-a73b-2b4b1311b19d"]}[Data],
+  TableNavigation = Navigation_2{[Id = "calendario", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
