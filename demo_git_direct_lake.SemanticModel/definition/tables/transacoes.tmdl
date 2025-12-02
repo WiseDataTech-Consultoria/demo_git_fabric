@@ -1,0 +1,52 @@
+table transacoes
+	lineageTag: 0ead0f0e-1bc1-4002-aa2d-c5fb73be1ca8
+	sourceLineageTag: [dbo].[transacoes]
+
+	column ID
+		dataType: double
+		lineageTag: c057c2a5-af29-4d74-bffd-48d389fd9d6a
+		sourceLineageTag: ID
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Data
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 193483c8-a8a4-4bd6-803d-bff95f202526
+		sourceLineageTag: Data
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: double
+		lineageTag: 5ef731f9-41f1-40c5-a037-c0b619f746a0
+		sourceLineageTag: Total
+		summarizeBy: sum
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Moeda
+		dataType: string
+		lineageTag: 1bf88ad1-a313-4443-97d3-03c2dee9d941
+		sourceLineageTag: Moeda
+		summarizeBy: none
+		sourceColumn: Moeda
+
+		annotation SummarizationSetBy = Automatic
+
+	partition transacoes = entity
+		mode: directLake
+		source
+			entityName: transacoes
+			schemaName: dbo
+			expressionSource: 'DirectLake - lake'
+
