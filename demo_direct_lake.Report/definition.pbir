@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
   "version": "4.0",
   "datasetReference": {
-    "byConnection": {
-      "connectionString": "Data Source=powerbi://api.powerbi.com/v1.0/myorg/demo_git_fabric_dev;initial catalog=demo_git_direct_lake;access mode=readonly;integrated security=ClaimsToken;semanticmodelid=eb30dcb1-f620-4559-90e9-2d26c04f3484"
+    "byPath": {
+      "path": "../demo_git_direct_lake.SemanticModel"
     }
   }
 }
